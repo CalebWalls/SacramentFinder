@@ -5,6 +5,6 @@ namespace SacramentFinder.Services
 {
     public interface ICreateUserService
     {
-        string CreateUser(CreateUser user, CancellationToken cancellationToken);
+        Task<string> CreateUser(CreateUser user, CancellationToken cancellationToken);
     }
 }

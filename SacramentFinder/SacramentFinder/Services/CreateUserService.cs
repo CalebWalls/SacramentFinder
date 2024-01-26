@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using SacramentFinder.Data;
+﻿using SacramentFinder.Data;
 using SacramentFinder.Models;
-using System.Net;
 
 namespace SacramentFinder.Services
 {
@@ -14,7 +11,7 @@ namespace SacramentFinder.Services
         {
             _userContext = userContext;
         }
-        public string CreateUser(CreateUser user, CancellationToken cancellationToken)
+        public async Task<string> CreateUser(CreateUser user, CancellationToken cancellationToken)
         {
             if (user.Username == null || user.Password == null || user.ConfirmPassword == null)
                 throw new Exception("Username, password, and confirm password are required fields."); 
@@ -23,15 +20,15 @@ namespace SacramentFinder.Services
                 throw new Exception("Password and confirm password must match.");
 
             //TODO: Add logic to create user in database
-            SaveUserToDatabase(user);
+            await SaveUserToDatabase(user);
 
             return "User created successfully.";
         }
 
-        private void SaveUserToDatabase(CreateUser user)
+        private async Task SaveUserToDatabase(CreateUser user)
         {
             _userContext.Users.Add(new Users { Username = user.Username, Password = user.Password});
-            _userContext.SaveChanges();
+            await _userContext.SaveChangesAsync();
         }
     }
 }
