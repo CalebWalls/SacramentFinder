@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SacramentFinder.Models;
 using SacramentFinder.Services;
-
+// This is Landon's First commit!
 namespace SacramentFinder.Controllers
 {
     [ApiController]
@@ -10,7 +10,7 @@ namespace SacramentFinder.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILoginService _identityService;
-
+        
         public LoginController(ILoginService identityService)
         {
             _identityService = identityService;
